@@ -3,39 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOC TOC TOC - MongBeach</title>
+    <title>TOC TOC TOC - Oficial Mongaguá</title>
     <style>
-        :root { 
-            --primary: #00796b; --child: #00bcd4; --bg: #f4f7f6; --alert: #d32f2f; --report: #ff9800;
-        }
+        :root { --primary: #00796b; --child: #00bcd4; --bg: #f4f7f6; --alert: #d32f2f; --report: #ff9800; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; }
-        .container { 
-            width: 100%; max-width: 500px; background: #fff; padding: 25px; 
-            border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            margin: 20px; text-align: center; display: flex; flex-direction: column; min-height: 90vh;
-        }
+        .container { width: 100%; max-width: 500px; background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: 20px; text-align: center; min-height: 90vh; display: flex; flex-direction: column; }
         .conteudo { flex-grow: 1; }
         .tela { display: none; animation: fadeIn 0.3s; }
         .ativa { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        h2 { color: var(--primary); font-size: 1.1rem; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-        .menu-inicial { display: grid; gap: 10px; margin-top: 20px; }
-        
+        h2 { color: var(--primary); font-size: 1.1rem; text-transform: uppercase; margin-bottom: 15px; }
         input, select { width: 100%; padding: 12px; margin: 6px 0; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.2s; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin-top: 10px; }
         
         .btn-resp { background: var(--primary); color: white; }
         .btn-prof { background: #546e7a; color: white; }
         .btn-child { background: var(--child); color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .btn-card { border: 2px solid #eee; border-radius: 18px; padding: 10px; cursor: pointer; background: #fff; transition: 0.2s; }
-        .btn-card:active { transform: scale(0.95); }
+        .btn-card { border: 2px solid #eee; border-radius: 18px; padding: 10px; cursor: pointer; background: #fff; }
         .btn-card img { width: 75px; height: 75px; object-fit: contain; }
         .btn-card p { font-size: 10px; font-weight: bold; margin-top: 5px; color: #555; text-transform: uppercase; }
         
-        .card-relatorio { background: #f9f9f9; padding: 15px; border-radius: 12px; border-left: 5px solid var(--primary); margin-bottom: 10px; text-align: left; font-size: 13px; }
+        .card-relatorio { background: #f9f9f9; padding: 15px; border-radius: 12px; border-left: 8px solid var(--primary); margin-bottom: 12px; text-align: left; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .footer { margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
@@ -59,18 +50,18 @@
             <input type="text" id="p_nome" placeholder="Seu Nome">
             <input type="text" id="p_cpf" placeholder="Seu CPF">
             <input type="text" id="c_nome" placeholder="Nome da Criança">
-            <input type="text" id="codigo_vinc" placeholder="Código da Turma (Ex: SALA-01)">
+            <input type="text" id="codigo_vinc" placeholder="Código da Turma (Ex: MONG-01)">
             <input type="password" id="p_senha" placeholder="Crie sua Senha">
-            <button class="btn-resp" onclick="salvarPai()">Salvar e Vincular</button>
+            <button class="btn-resp" onclick="salvarPai()">Salvar Cadastro</button>
             <button onclick="ir('menu')">Voltar</button>
         </div>
 
         <div id="cadastro_prof" class="tela">
             <h2>Novo Profissional</h2>
             <input type="text" id="prof_nome" placeholder="Nome Completo">
-            <input type="text" id="prof_id_vinc" placeholder="Código da Turma (Ex: SALA-01)">
+            <input type="text" id="prof_id_vinc" placeholder="Código da Turma (Ex: MONG-01)">
             <input type="password" id="prof_senha" placeholder="Crie sua Senha">
-            <button class="btn-prof" onclick="salvarProf()">Cadastrar</button>
+            <button class="btn-prof" onclick="salvarProf()">Cadastrar Profissional</button>
             <button onclick="ir('menu')">Voltar</button>
         </div>
 
@@ -85,23 +76,9 @@
         <div id="painel_pais" class="tela">
             <h2 id="boas_vindas_pai">Olá</h2>
             <button class="btn-child" onclick="ir('humor_inicial')">ENTREGAR PARA CRIANÇA</button>
-            <h3 style="font-size:14px; margin-top:20px;">Relatório Integrado</h3>
+            <h3 style="font-size:14px; margin-top:20px; color:var(--primary)">RELATÓRIO DE ACOMPANHAMENTO</h3>
             <div id="historico_integrado"></div>
             <button class="btn-resp" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
-        </div>
-
-        <div id="login_prof" class="tela">
-            <h2>Login Professor</h2>
-            <input type="text" id="l_prof_nome" placeholder="Seu Nome">
-            <input type="password" id="l_prof_senha" placeholder="Senha">
-            <button class="btn-prof" onclick="logarProf()">Entrar</button>
-            <button onclick="ir('menu')">Voltar</button>
-        </div>
-
-        <div id="painel_prof" class="tela">
-            <h2>Turma: <span id="id_turma_display"></span></h2>
-            <div id="lista_alunos_vinculados"></div>
-            <button class="btn-prof" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
         </div>
 
         <div id="humor_inicial" class="tela">
@@ -111,6 +88,16 @@
                 <div class="btn-card" onclick="setHumor('TRISTE')"><img src="tatu_triste.png"><p>TRISTE</p></div>
                 <div class="btn-card" onclick="setHumor('NORMAL')"><img src="tatu_neutro.png"><p>NORMAL</p></div>
                 <div class="btn-card" onclick="setHumor('ISOLADO')"><img src="tatu_enrolado.png"><p>ISOLADO</p></div>
+            </div>
+        </div>
+
+        <div id="motivo_feliz" class="tela">
+            <h2>O que deixou o Tatu feliz?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="finalizarCriança('BRINCOU NO PÁTIO')"><img src="patio.png"><p>PÁTIO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('RECEBEU UM ELOGIO')"><img src="tatu_feliz.png"><p>ELOGIO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('COMEU ALGO BOM')"><img src="tatu_feliz.png"><p>COMIDA</p></div>
+                <div class="btn-card" onclick="finalizarCriança('GANHOU PRESENTE')"><img src="tatu_feliz.png"><p>PRESENTE</p></div>
             </div>
         </div>
 
@@ -133,7 +120,7 @@
         </div>
 
         <div id="tela_porta" class="tela">
-            <h2>Como estava a porta?</h2>
+            <h2>A porta estava...</h2>
             <div class="grid">
                 <div class="btn-card" onclick="finalizarCriança('Porta Aberta')"><img src="porta_aberta.png"><p>ABERTA</p></div>
                 <div class="btn-card" onclick="finalizarCriança('Porta FECHADA')"><img src="porta_fechada.png"><p>FECHADA</p></div>
@@ -141,10 +128,10 @@
         </div>
 
         <div id="tela_castigo_interna" class="tela">
-            <h2>Como o Tatu se sentiu?</h2>
+            <h2>O que aconteceu lá?</h2>
             <div class="grid">
                 <div class="btn-card" onclick="finalizarCriança('As crianças riram')"><img src="criancas_riram.png"><p>CRIANÇAS RIRAM</p></div>
-                <div class="btn-card" onclick="finalizarCriança('Professora estava brava')"><img src="professora_brava.png"><p>PROFESSORA BRAVA</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Professora brava')"><img src="professora_brava.png"><p>PROFESSORA BRAVA</p></div>
             </div>
         </div>
 
@@ -154,7 +141,7 @@
                 <div class="btn-card" onclick="setAgente('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
                 <div class="btn-card" onclick="setAgente('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
                 <div class="btn-card" onclick="setAgente('Não conheço')"><img src="nao_conheco.png"><p>NÃO CONHEÇO</p></div>
-                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="sigilo.png"><p>NÃO POSSO FALAR</p></div>
+                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="sigilo.png"><p>SIGILO</p></div>
             </div>
         </div>
 
@@ -163,28 +150,40 @@
             <div class="grid">
                 <div class="btn-card" onclick="finalizarCriança('Nó na garganta')"><img src="sensacao_no.png"><p>NÓ</p></div>
                 <div class="btn-card" onclick="finalizarCriança('Raiva/Calor')"><img src="sensacao_raio.png"><p>RAIVA</p></div>
-                <div class="btn-card" onclick="finalizarCriança('Vontade de chorar')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Choro')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
             </div>
         </div>
 
+        <div id="login_prof" class="tela">
+            <h2>Login Professor</h2>
+            <input type="text" id="l_prof_nome" placeholder="Seu Nome">
+            <input type="password" id="l_prof_senha" placeholder="Senha">
+            <button class="btn-prof" onclick="logarProf()">Entrar</button>
+            <button onclick="ir('menu')">Voltar</button>
+        </div>
+
+        <div id="painel_prof" class="tela">
+            <h2>CÓDIGO: <span id="id_turma_display"></span></h2>
+            <div id="lista_alunos_vinculados"></div>
+            <button class="btn-prof" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
+        </div>
+
         <div id="tela_obs_prof" class="tela">
-            <h2 id="nome_aluno_obs">Observando</h2>
+            <h2 id="nome_aluno_obs">Diário Técnico</h2>
             <div style="text-align:left; font-size:12px;">
                 <label>Contato Visual:</label>
                 <select id="o_visual"><option>Normal</option><option>Fugaz</option><option>Inexistente</option></select>
                 <label>Isolamento no recreio?</label>
                 <select id="o_isolamento"><option>Não</option><option>Sim</option><option>Não sei</option></select>
-                <label>Crise ao sair da rotina?</label>
-                <select id="o_rotina"><option>Não</option><option>Sim</option><option>Não sei</option></select>
             </div>
-            <button class="btn-prof" onclick="salvarObsTecnica()" style="margin-top:15px;">Salvar no Diário</button>
+            <button class="btn-prof" onclick="salvarObsTecnica()">Salvar Diário</button>
         </div>
 
     </div>
 
     <div class="footer">
         Desenvolvido por <strong>MongBeach</strong><br>
-        Instagram: @mong.beach | WhatsApp: (13) 99175-3601
+        Instagram: @mong.beach | (13) 99175-3601
     </div>
 </div>
 
@@ -199,42 +198,38 @@
         window.scrollTo(0,0);
     }
 
-    // CADASTROS
     function salvarPai() {
         let pais = JSON.parse(localStorage.getItem('tt_pais')) || [];
-        let p = {
+        pais.push({
             nome: document.getElementById('p_nome').value,
             cpf: document.getElementById('p_cpf').value,
             crianca: document.getElementById('c_nome').value,
             codigoVinc: document.getElementById('codigo_vinc').value,
             senha: document.getElementById('p_senha').value
-        };
-        pais.push(p);
+        });
         localStorage.setItem('tt_pais', JSON.stringify(pais));
         alert("Cadastro realizado!"); ir('menu');
     }
 
     function salvarProf() {
         let profs = JSON.parse(localStorage.getItem('tt_profs')) || [];
-        let pr = {
+        profs.push({
             nome: document.getElementById('prof_nome').value,
             codigoVinc: document.getElementById('prof_id_vinc').value,
             senha: document.getElementById('prof_senha').value
-        };
-        profs.push(pr);
+        });
         localStorage.setItem('tt_profs', JSON.stringify(profs));
         alert("Professor cadastrado!"); ir('menu');
     }
 
-    // LOGINS
     function logarPai() {
         let pais = JSON.parse(localStorage.getItem('tt_pais')) || [];
         userLogado = pais.find(x => x.cpf === document.getElementById('l_pai_cpf').value && x.senha === document.getElementById('l_pai_senha').value);
         if(userLogado) {
-            document.getElementById('boas_vindas_pai').innerText = "Olá, " + userLogado.nome;
-            ir('painel_pais');
+            document.getElementById('boas_vindas_pai').innerText = "Responsável: " + userLogado.nome;
             mostrarRelatorioIntegrado();
-        } else alert("Acesso Negado.");
+            ir('painel_pais');
+        } else alert("CPF ou Senha inválidos.");
     }
 
     function logarProf() {
@@ -242,27 +237,25 @@
         userLogado = profs.find(x => x.nome === document.getElementById('l_prof_nome').value && x.senha === document.getElementById('l_prof_senha').value);
         if(userLogado) {
             document.getElementById('id_turma_display').innerText = userLogado.codigoVinc;
-            ir('painel_prof');
             listarAlunos();
+            ir('painel_prof');
         } else alert("Professor não encontrado.");
     }
 
-    // LÓGICA PROFESSOR
     function listarAlunos() {
         let pais = JSON.parse(localStorage.getItem('tt_pais')) || [];
         let meusAlunos = pais.filter(p => p.codigoVinc === userLogado.codigoVinc);
-        let lista = document.getElementById('lista_alunos_vinculados');
-        lista.innerHTML = meusAlunos.map(a => `
+        document.getElementById('lista_alunos_vinculados').innerHTML = meusAlunos.map(a => `
             <div style="background:#f0f0f0; padding:12px; margin:8px; border-radius:12px; text-align:left;">
                 <strong>${a.crianca}</strong><br>
-                <button onclick="abrirObs('${a.crianca}', '${a.cpf}')" style="background:var(--primary); color:white; padding:8px; margin-top:8px; font-size:11px; border-radius:8px;">Observar</button>
+                <button onclick="abrirObs('${a.crianca}', '${a.cpf}')" style="background:var(--primary); color:white; padding:8px; margin-top:8px; border-radius:8px;">Anotação Técnica</button>
             </div>
         `).join('') || "Nenhum aluno vinculado.";
     }
 
     function abrirObs(nome, paiCpf) {
         alunoSelecionado = { nome: nome, paiCpf: paiCpf };
-        document.getElementById('nome_aluno_obs').innerText = "Observando: " + nome;
+        document.getElementById('nome_aluno_obs').innerText = "Aluno: " + nome;
         ir('tela_obs_prof');
     }
 
@@ -270,7 +263,6 @@
         let obs = JSON.parse(localStorage.getItem('tt_obs')) || [];
         obs.push({
             paiCpf: alunoSelecionado.paiCpf,
-            aluno: alunoSelecionado.nome,
             prof: userLogado.nome,
             data: new Date().toLocaleString(),
             tipo: 'PROFISSIONAL',
@@ -278,19 +270,18 @@
             isolamento: document.getElementById('o_isolamento').value
         });
         localStorage.setItem('tt_obs', JSON.stringify(obs));
-        alert("Observação salva!"); ir('painel_prof');
+        alert("Observação enviada aos pais!"); ir('painel_prof');
     }
 
-    // LÓGICA CRIANÇA (O TATU)
     function setHumor(h) { 
         relatoCriança = { humor: h, ocorrencia: '', detalhe: '' }; 
-        ir(h === 'FELIZ' ? 'painel_pais' : 'motivo_triste'); 
-        if(h === 'FELIZ') alert('O Tatu está feliz!');
+        if(h === 'FELIZ') ir('motivo_feliz');
+        else if(h === 'NORMAL') finalizarCriança('O dia foi tranquilo');
+        else ir('motivo_triste');
     }
 
     function setOcorrencia(o, proxima) {
-        if(relatoCriança.ocorrencia) relatoCriança.ocorrencia += " -> " + o;
-        else relatoCriança.ocorrencia = o;
+        relatoCriança.ocorrencia += (relatoCriança.ocorrencia ? " -> " : "") + o;
         ir(proxima);
     }
 
@@ -300,35 +291,34 @@
     }
 
     function finalizarCriança(d) {
-        if (relatoCriança.detalhe) relatoCriança.detalhe += " | Sentiu: " + d;
+        if (relatoCriança.detalhe) relatoCriança.detalhe += " | Relato: " + d;
         else relatoCriança.detalhe = d;
         
         let obs = JSON.parse(localStorage.getItem('tt_obs')) || [];
         obs.push({
             paiCpf: userLogado.cpf,
-            aluno: userLogado.crianca,
             data: new Date().toLocaleString(),
             tipo: 'CRIANÇA',
             humor: relatoCriança.humor,
-            ocorrencia: relatoCriança.ocorrencia,
+            ocorrencia: relatoCriança.ocorrencia || 'N/A',
             detalhe: relatoCriança.detalhe
         });
         localStorage.setItem('tt_obs', JSON.stringify(obs));
-        alert("O Tatu guardou o segredo!"); ir('painel_pais');
+        alert("O Tatu contou para o papai!"); 
         mostrarRelatorioIntegrado();
+        ir('painel_pais');
     }
 
-    // RELATÓRIO INTEGRADO
     function mostrarRelatorioIntegrado() {
         let todas = JSON.parse(localStorage.getItem('tt_obs')) || [];
         let minhas = todas.filter(o => o.paiCpf === userLogado.cpf);
         document.getElementById('historico_integrado').innerHTML = minhas.reverse().map(o => `
             <div class="card-relatorio" style="border-left-color: ${o.tipo === 'CRIANÇA' ? 'var(--child)' : 'var(--primary)'}">
-                <small>${o.data} - <strong>${o.tipo}</strong></small><br>
-                ${o.tipo === 'CRIANÇA' ? `Humor: ${o.humor} | Ocorrência: ${o.ocorrencia} | ${o.detalhe}` : 
-                `<strong>Prof. ${o.prof}:</strong> Visão: ${o.visual} | Isolamento: ${o.isolamento}`}
+                <small><strong>${o.data}</strong> - ${o.tipo}</small><br>
+                ${o.tipo === 'CRIANÇA' ? `Humor: ${o.humor} <br> Ocorrência: ${o.ocorrencia} <br> Detalhe: ${o.detalhe}` : 
+                `<strong>Professor(a) ${o.prof}:</strong><br>Contato Visual: ${o.visual} | Isolamento: ${o.isolamento}`}
             </div>
-        `).join('') || "Nenhum relato ainda.";
+        `).join('') || "<p style='font-size:12px; color:#999'>Nenhum registro encontrado para esta criança.</p>";
     }
 </script>
 </body>
