@@ -15,7 +15,22 @@
             --report: #ff9800;
         }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 500px; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: 20px; text-align: center; overflow-x: hidden; }
+        
+        .container { 
+            width: 100%; 
+            max-width: 500px; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            margin: 20px; 
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+
+        .conteudo { flex-grow: 1; }
         .tela { display: none; }
         .ativa { display: block; }
         
@@ -29,223 +44,208 @@
         
         button { width: 100%; padding: 15px; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 8px; text-transform: uppercase; }
         
-        .btn-child { background: var(--child); color: white; font-size: 1.1rem; }
+        .btn-child { background: var(--child); color: white; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3); }
         .btn-resp { background: var(--primary); color: white; }
         .btn-prof { background: #546e7a; color: white; }
         .btn-report { background: var(--report); color: white; }
-        .btn-admin { background: var(--admin); color: white; font-size: 10px; margin-top: 40px; }
+        .btn-admin { background: var(--admin); color: white; font-size: 10px; margin-top: 40px; opacity: 0.6; }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         .btn-card { border: 2px solid #eee; border-radius: 15px; padding: 15px; cursor: pointer; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .btn-card:active { transform: scale(0.95); border-color: var(--primary); }
         .btn-card img { width: 85px; height: 85px; object-fit: contain; }
         .btn-card p { font-size: 11px; font-weight: bold; margin: 8px 0 0; color: #555; }
 
-        .lgpd-box { font-size: 11px; color: #666; background: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #eee; height: 50px; overflow-y: scroll; margin: 10px 0; text-align: left; }
-        .gestor-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 15px; }
-        .gestor-table th, .gestor-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .gestor-table th { background: #f0f0f0; }
-
-        .alerta-box { background: #fff3f3; padding: 20px; border-radius: 15px; border: 2px solid var(--alert); color: var(--alert); font-size: 14px; line-height: 1.5; }
+        /* RODAPÉ */
+        .footer { 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee; 
+            font-size: 12px; 
+            color: #777; 
+        }
+        .footer strong { color: var(--primary); }
+        .footer a { color: #555; text-decoration: none; font-weight: bold; }
+        
+        .alerta-box { background: #fff3f3; padding: 20px; border-radius: 15px; border: 2px solid var(--alert); color: var(--alert); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    
-    <div id="menu" class="tela ativa">
-        <h2 style="letter-spacing: 2px;">TOC TOC TOC</h2>
-        <div class="menu-inicial">
-            <button class="btn-child" onclick="ir('humor_inicial')">ÁREA DA CRIANÇA</button>
-            <button class="btn-resp" onclick="ir('cadastro_pai')">CADASTRO RESPONSÁVEL</button>
-            <button class="btn-prof" onclick="ir('cadastro_prof')">CADASTRO PROFISSIONAL</button>
-            <button class="btn-prof" style="background: #37474f;" onclick="ir('login_prof_acesso')">ACOMPANHAMENTO ESCOLAR</button>
-            <button class="btn-report" onclick="ir('login_pais')">SOU MÃE/PAI (RELATÓRIOS)</button>
-            <button class="btn-admin" onclick="ir('login_admin')">ÁREA DO GESTOR</button>
+    <div class="conteudo">
+        
+        <div id="menu" class="tela ativa">
+            <h2 style="letter-spacing: 2px;">TOC TOC TOC</h2>
+            <div class="menu-inicial">
+                <button class="btn-resp" onclick="ir('cadastro_pai')">CADASTRO RESPONSÁVEL</button>
+                <button class="btn-prof" onclick="ir('cadastro_prof')">CADASTRO PROFISSIONAL</button>
+                <button class="btn-report" onclick="ir('login_pais')">ACESSO DOS PAIS / RELATÓRIOS</button>
+                <button class="btn-prof" style="background: #37474f;" onclick="ir('login_prof_acesso')">ACOMPANHAMENTO ESCOLAR</button>
+                <button class="btn-admin" onclick="ir('login_admin')">ÁREA DO GESTOR</button>
+            </div>
         </div>
-    </div>
 
-    <div id="cadastro_pai" class="tela">
-        <h2>Cadastro do Responsável</h2>
-        <input type="text" id="p_nome" placeholder="Nome Completo">
-        <input type="text" id="p_cpf" placeholder="CPF">
-        <input type="tel" id="p_zap" placeholder="WhatsApp">
-        <input type="email" id="p_email" placeholder="E-mail">
-        <input type="text" id="c_nome" placeholder="Apelido da Criança">
-        <input type="password" id="p_senha" placeholder="Crie uma Senha">
-        <div class="lgpd-box"><strong>Termos LGPD:</strong> Autorizo o uso dos dados para acompanhamento clínico e escolar.</div>
-        <button class="btn-resp" onclick="salvar('pai')">SALVAR CADASTRO</button>
-        <button onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="cadastro_prof" class="tela">
-        <h2>Cadastro do Profissional</h2>
-        <input type="text" id="prof_nome" placeholder="Nome Completo">
-        <input type="text" id="prof_cpf" placeholder="CPF">
-        <select id="prof_relacao">
-            <option value="">Relação com a criança...</option>
-            <option value="Professor">Professor(a)</option>
-            <option value="Diretor">Diretor(a)</option>
-            <option value="Terapeuta">Terapeuta</option>
-            <option value="Psicologo">Psicólogo(a)</option>
-        </select>
-        <input type="password" id="prof_senha" placeholder="Crie uma Senha">
-        <button class="btn-prof" onclick="salvar('prof')">CADASTRAR</button>
-        <button onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="humor_inicial" class="tela">
-        <h2>Como o Tatu está agora?</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="setHumor('FELIZ')"><img src="tatu_feliz.png"><p>FELIZ</p></div>
-            <div class="btn-card" onclick="setHumor('TRISTE')"><img src="tatu_triste.png"><p>TRISTE</p></div>
-            <div class="btn-card" onclick="setHumor('NORMAL')"><img src="tatu_neutro.png"><p>NORMAL</p></div>
-            <div class="btn-card" onclick="setHumor('ISOLADA')"><img src="tatu_enrolado.png"><p>ISOLADA</p></div>
+        <div id="cadastro_pai" class="tela">
+            <h2>Cadastro do Responsável</h2>
+            <input type="text" id="p_nome" placeholder="Nome Completo">
+            <input type="text" id="p_cpf" placeholder="CPF">
+            <input type="tel" id="p_zap" placeholder="WhatsApp">
+            <input type="email" id="p_email" placeholder="E-mail">
+            <input type="text" id="c_nome" placeholder="Apelido da Criança">
+            <input type="password" id="p_senha" placeholder="Crie uma Senha">
+            <button class="btn-resp" onclick="salvar('pai')">SALVAR CADASTRO</button>
+            <button onclick="ir('menu')">VOLTAR</button>
         </div>
-    </div>
 
-    <div id="motivo_feliz" class="tela">
-        <h2>O que te deixou Feliz?</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="finalizarRelato('Brincou no pátio')"><img src="patio.png"><p>PÁTIO</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Foi elogiada')"><img src="tatu_feliz.png"><p>ELOGIO</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Ganhou presente')"><img src="tatu_feliz.png"><p>PRESENTE</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Comeu algo gostoso')"><img src="tatu_feliz.png"><p>COMIDA</p></div>
+        <div id="cadastro_prof" class="tela">
+            <h2>Cadastro do Profissional</h2>
+            <input type="text" id="prof_nome" placeholder="Nome Completo">
+            <input type="text" id="prof_cpf" placeholder="CPF">
+            <select id="prof_relacao">
+                <option value="">Relação com a criança...</option>
+                <option value="Professor">Professor(a)</option>
+                <option value="Diretor">Diretor(a)</option>
+                <option value="Terapeuta">Terapeuta</option>
+                <option value="Psicologo">Psicólogo(a)</option>
+            </select>
+            <input type="password" id="prof_senha" placeholder="Crie uma Senha">
+            <button class="btn-prof" onclick="salvar('prof')">CADASTRAR</button>
+            <button onclick="ir('menu')">VOLTAR</button>
         </div>
-    </div>
 
-    <div id="motivo_triste" class="tela">
-        <h2>O que houve?</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="ir('tela_castigo')"><p>CASTIGO</p></div>
-            <div class="btn-card" onclick="setAgente('RIRAM DE MIM', 'tela_agentes')"><img src="grupo_bullying.png"><p>RIRAM DE MIM</p></div>
-            <div class="btn-card" onclick="setAgente('ISOLADA/IGNORADA', 'tela_agentes')"><img src="grupo_sozinho.png"><p>ME IGNORARAM</p></div>
-            <div class="btn-card" onclick="setAgente('AGREDIRAM/MACHUCARAM', 'tela_agentes')"><img src="sensacao_raio.png"><p>MACHUCARAM</p></div>
+        <div id="login_pais" class="tela">
+            <h2>Acesso Pai/Mãe</h2>
+            <input type="text" id="login_cpf" placeholder="Seu CPF">
+            <input type="password" id="login_senha" placeholder="Senha">
+            <button class="btn-report" onclick="acessarRelatorio()">ENTRAR NO PAINEL</button>
+            <button onclick="ir('menu')">VOLTAR</button>
         </div>
-    </div>
 
-    <div id="tela_castigo" class="tela">
-        <h2>Onde foi o castigo?</h2>
-        <button class="btn-prof" onclick="ir('tela_porta')">FORA DA SALA</button>
-        <button class="btn-prof" onclick="ir('tela_castigo_interna')">DENTRO DA SALA</button>
-    </div>
-
-    <div id="tela_porta" class="tela">
-        <h2>A porta estava...</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="finalizarRelato('Fora da sala - Porta Aberta')"><img src="porta_aberta.png"><p>ABERTA</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Fora da sala - Porta FECHADA')"><img src="porta_fechada.png"><p>FECHADA</p></div>
+        <div id="painel_pais" class="tela">
+            <h2>Área do Responsável</h2>
+            <button class="btn-child" onclick="ir('humor_inicial')">ENTREGAR PARA CRIANÇA</button>
+            <hr style="margin: 20px 0;">
+            <h3>Histórico de Relatos</h3>
+            <div id="lista_relatorios" style="max-height: 250px; overflow-y: auto;"></div>
+            <button class="btn-resp" onclick="ir('menu')" style="margin-top:20px;">SAIR</button>
         </div>
-    </div>
 
-    <div id="tela_castigo_interna" class="tela">
-        <h2>Na sala...</h2>
-        <button class="btn-resp" onclick="finalizarRelato('Na sala - Crianças riram')">CRIANÇAS RIRAM</button>
-        <button class="btn-resp" onclick="finalizarRelato('Na sala - Professora brava')">PROFESSORA BRAVA</button>
-    </div>
-
-    <div id="tela_agentes" class="tela">
-        <h2>Quem foi?</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="setSentimentoCorpo('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
-            <div class="btn-card" onclick="setSentimentoCorpo('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
-            <div class="btn-card" onclick="setSentimentoCorpo('Não conheço')"><p>NÃO CONHEÇO</p></div>
-            <div class="btn-card" onclick="setSentimentoCorpo('Conheço mas sigilo')"><p>SIGILO</p></div>
+        <div id="humor_inicial" class="tela">
+            <h2>Como o Tatu está?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="setHumor('FELIZ')"><img src="tatu_feliz.png"><p>FELIZ</p></div>
+                <div class="btn-card" onclick="setHumor('TRISTE')"><img src="tatu_triste.png"><p>TRISTE</p></div>
+                <div class="btn-card" onclick="setHumor('NORMAL')"><img src="tatu_neutro.png"><p>NORMAL</p></div>
+                <div class="btn-card" onclick="setHumor('ISOLADA')"><img src="tatu_enrolado.png"><p>ISOLADA</p></div>
+            </div>
         </div>
-    </div>
 
-    <div id="tela_corpo" class="tela">
-        <h2>No corpo senti...</h2>
-        <div class="grid">
-            <div class="btn-card" onclick="finalizarRelato('Nó na garganta')"><img src="sensacao_no.png"><p>NÓ</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Raiva')"><img src="sensacao_raio.png"><p>RAIVA</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Choro')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
-            <div class="btn-card" onclick="finalizarRelato('Dor')"><img src="tatu_triste.png"><p>DOR</p></div>
+        <div id="motivo_feliz" class="tela">
+            <h2>O que te deixou Feliz?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="finalizarRelato('Brincou no pátio')"><img src="patio.png"><p>PÁTIO</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Foi elogiada')"><img src="tatu_feliz.png"><p>ELOGIO</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Ganhou presente')"><img src="tatu_feliz.png"><p>PRESENTE</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Comeu algo gostoso')"><img src="tatu_feliz.png"><p>COMIDA</p></div>
+            </div>
         </div>
-    </div>
 
-    <div id="login_prof_acesso" class="tela">
-        <h2>Acesso Profissional</h2>
-        <input type="text" id="prof_login_cpf" placeholder="Seu CPF">
-        <input type="password" id="prof_login_senha" placeholder="Senha">
-        <button class="btn-prof" onclick="acessarAcompanhamento()">ENTRAR NO DIÁRIO</button>
-        <button onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="tela_acompanhamento" class="tela">
-        <h2>Observação Diária</h2>
-        <div style="text-align: left; background: #fafafa; padding: 15px; border-radius: 15px;">
-            <label>Dificuldade em manter conversas?</label>
-            <select id="obs_conversa"><option value="Sim">Sim</option><option value="Não">Não</option></select>
-            
-            <label>Interpretação literal?</label>
-            <select id="obs_literal"><option value="Sim">Sim</option><option value="Não">Não</option></select>
-
-            <label>Contato Visual:</label>
-            <select id="obs_visual"><option value="Fugaz">Fugaz</option><option value="Fixo demais">Fixo demais</option><option value="Inexistente">Inexistente</option><option value="Normal">Normal</option></select>
-
-            <label>Isolamento no recreio?</label>
-            <select id="obs_isolamento"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Interesses Restritos (Hiperfoco)?</label>
-            <select id="obs_hiperfoco"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Crise ao sair da rotina?</label>
-            <select id="obs_rotina"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Estereotipias (Stimms)?</label>
-            <select id="obs_stimm"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Hipersensibilidade (Sons/Texturas)?</label>
-            <select id="obs_hiper"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Hipossensibilidade/Automutilação?</label>
-            <select id="obs_hipo"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-
-            <label>Comportamento desafiador?</label>
-            <select id="obs_desafiador"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
+        <div id="motivo_triste" class="tela">
+            <h2>O que houve?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="ir('tela_castigo')"><p>CASTIGO</p></div>
+                <div class="btn-card" onclick="setAgente('RIRAM DE MIM', 'tela_agentes')"><img src="grupo_bullying.png"><p>RIRAM DE MIM</p></div>
+                <div class="btn-card" onclick="setAgente('ISOLADA/IGNORADA', 'tela_agentes')"><img src="grupo_sozinho.png"><p>ME IGNORARAM</p></div>
+                <div class="btn-card" onclick="setAgente('AGREDIRAM/MACHUCARAM', 'tela_agentes')"><img src="sensacao_raio.png"><p>MACHUCARAM</p></div>
+            </div>
         </div>
-        <button class="btn-prof" onclick="salvarAcompanhamento()">SALVAR OBSERVAÇÃO</button>
-        <button onclick="ir('menu')">CANCELAR</button>
-    </div>
 
-    <div id="tela_alerta_prof" class="tela">
-        <div class="alerta-box">
-            <h3>AVISO DE CAPACITAÇÃO</h3>
-            <p>Você marcou "Não Sei" em mais de 3 itens fundamentais.</p>
-            <p><strong>Isso indica falta de observação ou desinteresse.</strong> Recomendamos cursos para melhorar sua interação com os alunos.</p>
+        <div id="tela_castigo" class="tela">
+            <h2>Onde foi o castigo?</h2>
+            <button class="btn-prof" onclick="ir('tela_porta')">FORA DA SALA</button>
+            <button class="btn-prof" onclick="ir('tela_castigo_interna')">DENTRO DA SALA</button>
         </div>
-        <button class="btn-prof" onclick="ir('menu')">ENTENDIDO</button>
+
+        <div id="tela_porta" class="tela">
+            <h2>A porta estava...</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="finalizarRelato('Fora da sala - Porta Aberta')"><img src="porta_aberta.png"><p>ABERTA</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Fora da sala - Porta FECHADA')"><img src="porta_fechada.png"><p>FECHADA</p></div>
+            </div>
+        </div>
+
+        <div id="tela_castigo_interna" class="tela">
+            <h2>Na sala...</h2>
+            <button class="btn-resp" onclick="finalizarRelato('Na sala - Crianças riram')">CRIANÇAS RIRAM</button>
+            <button class="btn-resp" onclick="finalizarRelato('Na sala - Professora brava')">PROFESSORA BRAVA</button>
+        </div>
+
+        <div id="tela_agentes" class="tela">
+            <h2>Quem foi?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="setSentimentoCorpo('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
+                <div class="btn-card" onclick="setSentimentoCorpo('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
+                <div class="btn-card" onclick="setSentimentoCorpo('Não conheço')"><p>NÃO CONHEÇO</p></div>
+                <div class="btn-card" onclick="setSentimentoCorpo('Conheço mas sigilo')"><p>SIGILO</p></div>
+            </div>
+        </div>
+
+        <div id="tela_corpo" class="tela">
+            <h2>No corpo senti...</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="finalizarRelato('Nó na garganta')"><img src="sensacao_no.png"><p>NÓ</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Raiva')"><img src="sensacao_raio.png"><p>RAIVA</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Choro')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Dor')"><img src="tatu_triste.png"><p>DOR</p></div>
+            </div>
+        </div>
+
+        <div id="login_prof_acesso" class="tela">
+            <h2>Acesso Profissional</h2>
+            <input type="text" id="prof_login_cpf" placeholder="Seu CPF">
+            <input type="password" id="prof_login_senha" placeholder="Senha">
+            <button class="btn-prof" onclick="acessarAcompanhamento()">ENTRAR NO DIÁRIO</button>
+            <button onclick="ir('menu')">VOLTAR</button>
+        </div>
+
+        <div id="tela_acompanhamento" class="tela">
+            <h2>Observação Diária</h2>
+            <div style="text-align: left; background: #fafafa; padding: 15px; border-radius: 15px;">
+                <label>Dificuldade em manter conversas?</label>
+                <select id="obs_conversa"><option value="Sim">Sim</option><option value="Não">Não</option></select>
+                <label>Contato Visual:</label>
+                <select id="obs_visual"><option value="Fugaz">Fugaz</option><option value="Fixo">Fixo</option><option value="Inexistente">Inexistente</option></select>
+                <label>Isolamento no recreio?</label>
+                <select id="obs_isolamento"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
+                <label>Comportamento desafiador?</label>
+                <select id="obs_desafiador"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
+                </div>
+            <button class="btn-prof" onclick="salvarAcompanhamento()">SALVAR OBSERVAÇÃO</button>
+            <button onclick="ir('menu')">CANCELAR</button>
+        </div>
+
+        <div id="login_admin" class="tela">
+            <h2>Acesso Gestor</h2>
+            <input type="password" id="admin_key" placeholder="Senha Administrador">
+            <button class="btn-admin" onclick="acessarAdmin()">ENTRAR</button>
+            <button onclick="ir('menu')">VOLTAR</button>
+        </div>
+
+        <div id="painel_admin" class="tela">
+            <h2>Todos os Cadastros</h2>
+            <table class="gestor-table" id="tabela_admin">
+                <thead><tr><th>Tipo</th><th>Nome</th><th>ID</th></tr></thead>
+                <tbody></tbody>
+            </table>
+            <button onclick="ir('menu')">VOLTAR</button>
+        </div>
+
     </div>
 
-    <div id="login_pais" class="tela">
-        <h2>Acesso Pai/Mãe</h2>
-        <input type="text" id="login_cpf" placeholder="Seu CPF">
-        <input type="password" id="login_senha" placeholder="Senha">
-        <button class="btn-report" onclick="acessarRelatorio()">VER DIÁRIO DA CRIANÇA</button>
-        <button onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="painel_pais" class="tela">
-        <h2>Histórico</h2>
-        <div id="lista_relatorios" style="max-height: 400px; overflow-y: auto;"></div>
-        <button class="btn-resp" onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="login_admin" class="tela">
-        <h2>Acesso Gestor</h2>
-        <input type="password" id="admin_key" placeholder="Senha Administrador">
-        <button class="btn-admin" onclick="acessarAdmin()">ENTRAR</button>
-        <button onclick="ir('menu')">VOLTAR</button>
-    </div>
-
-    <div id="painel_admin" class="tela">
-        <h2>Todos os Cadastros</h2>
-        <table class="gestor-table" id="tabela_admin">
-            <thead><tr><th>Tipo</th><th>Nome</th><th>ID</th><th>Acesso/Contato</th></tr></thead>
-            <tbody></tbody>
-        </table>
-        <button onclick="ir('menu')" style="margin-top:20px;">VOLTAR</button>
+    <div class="footer">
+        Desenvolvido por <strong>MongBeach</strong><br>
+        <a href="https://instagram.com/mong.beach" target="_blank">@mong.beach</a> | 
+        <a href="https://wa.me/5513991753601">WhatsApp: (13) 99175-3601</a>
     </div>
 
 </div>
@@ -258,42 +258,24 @@
         document.getElementById(id).classList.add('ativa');
     }
 
-    // CADASTROS
     function salvar(tipo) {
         let dados = JSON.parse(localStorage.getItem('toctoc_usuarios')) || [];
-        let u = { tipo: tipo };
-        if(tipo === 'pai') {
-            u.nome = document.getElementById('p_nome').value;
-            u.identificacao = document.getElementById('p_cpf').value;
-            u.contato = document.getElementById('p_zap').value;
-            u.senha = document.getElementById('p_senha').value;
-        } else {
-            u.nome = document.getElementById('prof_nome').value;
-            u.identificacao = document.getElementById('prof_cpf').value;
-            u.contato = document.getElementById('prof_relacao').value;
-            u.senha = document.getElementById('prof_senha').value;
-        }
-        if(!u.nome || !u.identificacao || !u.senha) return alert("Preencha os campos!");
+        let u = { tipo: tipo, nome: document.getElementById(tipo==='pai'?'p_nome':'prof_nome').value, identificacao: document.getElementById(tipo==='pai'?'p_cpf':'prof_cpf').value, senha: document.getElementById(tipo==='pai'?'p_senha':'prof_senha').value };
         dados.push(u);
         localStorage.setItem('toctoc_usuarios', JSON.stringify(dados));
-        alert('Cadastro realizado!'); ir('menu');
+        alert('Cadastrado!'); ir('menu');
     }
 
-    function acessarAdmin() {
-        if(document.getElementById('admin_key').value === '123Pin567Pin') {
-            ir('painel_admin');
-            const dados = JSON.parse(localStorage.getItem('toctoc_usuarios')) || [];
-            document.querySelector('#tabela_admin tbody').innerHTML = dados.map(u => 
-                `<tr><td>${u.tipo}</td><td>${u.nome}</td><td>${u.identificacao}</td><td>${u.contato}</td></tr>`
-            ).join('');
-        } else { alert('Acesso Negado'); }
+    function acessarRelatorio() {
+        const u = (JSON.parse(localStorage.getItem('toctoc_usuarios')) || []).find(x => x.tipo === 'pai' && x.identificacao === document.getElementById('login_cpf').value && x.senha === document.getElementById('login_senha').value);
+        if(u) {
+            ir('painel_pais');
+            const h = JSON.parse(localStorage.getItem('toctoc_historico')) || [];
+            document.getElementById('lista_relatorios').innerHTML = h.reverse().map(r => `<div style="border-left:5px solid ${r.humor==='FELIZ'?'green':'red'}; padding:10px; margin:10px 0; background:#f9f9f9; text-align:left;"><small>${r.data}</small><br><strong>${r.humor}</strong> - ${r.detalhe}</div>`).join('');
+        } else alert("Erro de acesso.");
     }
 
-    // JORNADA CRIANÇA
-    function setHumor(h) {
-        tempRelato = { data: new Date().toLocaleString(), humor: h };
-        ir(h === 'FELIZ' ? 'motivo_feliz' : 'motivo_triste');
-    }
+    function setHumor(h) { tempRelato = { data: new Date().toLocaleString(), humor: h }; ir(h === 'FELIZ' ? 'motivo_feliz' : 'motivo_triste'); }
     function setAgente(o, p) { tempRelato.ocorrencia = o; ir(p); }
     function setSentimentoCorpo(a) { tempRelato.agente = a; ir('tela_corpo'); }
     function finalizarRelato(d) {
@@ -301,43 +283,18 @@
         let h = JSON.parse(localStorage.getItem('toctoc_historico')) || [];
         h.push(tempRelato);
         localStorage.setItem('toctoc_historico', JSON.stringify(h));
-        alert("Salvo!"); ir('menu');
+        alert("Salvo!"); ir('painel_pais');
     }
 
-    // RELATÓRIO PAI
-    function acessarRelatorio() {
-        const u = (JSON.parse(localStorage.getItem('toctoc_usuarios')) || []).find(x => 
-            x.tipo === 'pai' && x.identificacao === document.getElementById('login_cpf').value && x.senha === document.getElementById('login_senha').value
-        );
-        if(u) {
-            ir('painel_pais');
-            const h = JSON.parse(localStorage.getItem('toctoc_historico')) || [];
-            document.getElementById('lista_relatorios').innerHTML = h.reverse().map(r => `
-                <div style="border:1px solid #ddd; padding:15px; margin-bottom:10px; border-radius:15px; text-align:left; border-left:8px solid ${r.humor === 'FELIZ' ? 'green' : 'red'};">
-                    <small>${r.data}</small><br><strong>Humor: ${r.humor}</strong><br>
-                    ${r.agente ? `Quem: ${r.agente}<br>` : ''}
-                    ${r.ocorrencia ? `Ocorrência: ${r.ocorrencia}<br>` : ''}
-                    Detalhe: ${r.detalhe}
-                </div>
-            `).join('');
-        } else { alert("Senha ou CPF inválido"); }
-    }
+    function acessarAcompanhamento() { ir('tela_acompanhamento'); }
+    function salvarAcompanhamento() { alert("Observação salva!"); ir('menu'); }
 
-    // ACOMPANHAMENTO PROFISSIONAL
-    function acessarAcompanhamento() {
-        const u = (JSON.parse(localStorage.getItem('toctoc_usuarios')) || []).find(x => 
-            x.tipo === 'prof' && x.identificacao === document.getElementById('prof_login_cpf').value && x.senha === document.getElementById('prof_login_senha').value
-        );
-        if(u) ir('tela_acompanhamento'); else alert("Acesso Negado");
-    }
-
-    function salvarAcompanhamento() {
-        const ids = ['obs_isolamento','obs_hiperfoco','obs_rotina','obs_stimm','obs_hiper','obs_hipo','obs_desafiador'];
-        let naoSei = 0;
-        ids.forEach(id => { if(document.getElementById(id).value === 'Não sei') naoSei++; });
-        
-        if(naoSei > 3) ir('tela_alerta_prof');
-        else { alert("Observação técnica salva!"); ir('menu'); }
+    function acessarAdmin() {
+        if(document.getElementById('admin_key').value === '123Pin567Pin') {
+            ir('painel_admin');
+            const dados = JSON.parse(localStorage.getItem('toctoc_usuarios')) || [];
+            document.querySelector('#tabela_admin tbody').innerHTML = dados.map(u => `<tr><td>${u.tipo}</td><td>${u.nome}</td><td>${u.identificacao}</td></tr>`).join('');
+        }
     }
 </script>
 </body>
