@@ -35,9 +35,6 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
         h2 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; font-size: 1.2rem; }
-        h3 { color: #555; font-size: 15px; margin-top: 15px; }
-        
-        .menu-inicial { display: grid; gap: 12px; margin-top: 20px; }
         
         input, select { width: 100%; padding: 14px; margin: 8px 0; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; font-size: 14px; }
         label { display: block; text-align: left; font-size: 12px; font-weight: bold; margin-top: 12px; color: #666; }
@@ -54,7 +51,7 @@
         .btn-card { border: 2px solid #eee; border-radius: 18px; padding: 15px; cursor: pointer; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.2s; }
         .btn-card:active { transform: scale(0.92); border-color: var(--primary); }
         .btn-card img { width: 80px; height: 80px; object-fit: contain; }
-        .btn-card p { font-size: 11px; font-weight: bold; margin: 8px 0 0; color: #555; }
+        .btn-card p { font-size: 11px; font-weight: bold; margin: 8px 0 0; color: #555; text-transform: uppercase; }
 
         .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #888; line-height: 1.6; }
         .footer strong { color: var(--primary); }
@@ -123,7 +120,7 @@
         </div>
 
         <div id="humor_inicial" class="tela">
-            <h2>Como o Tatu está agora?</h2>
+            <h2>Como o Tatu está?</h2>
             <div class="grid">
                 <div class="btn-card" onclick="setHumor('FELIZ')"><img src="tatu_feliz.png"><p>FELIZ</p></div>
                 <div class="btn-card" onclick="setHumor('TRISTE')"><img src="tatu_triste.png"><p>TRISTE</p></div>
@@ -145,7 +142,7 @@
         <div id="motivo_triste" class="tela">
             <h2>O que aconteceu com o Tatu?</h2>
             <div class="grid">
-                <div class="btn-card" onclick="setOcorrencia('FICOU DE CASTIGO', 'tela_castigo')"><p>CASTIGO</p></div>
+                <div class="btn-card" onclick="setOcorrencia('FICOU DE CASTIGO', 'tela_castigo')"><img src="castigo.png"><p>CASTIGO</p></div>
                 <div class="btn-card" onclick="setOcorrencia('RIRAM DE MIM', 'tela_agentes')"><img src="grupo_bullying.png"><p>RIRAM DE MIM</p></div>
                 <div class="btn-card" onclick="setOcorrencia('ISOLADA/IGNORADA', 'tela_agentes')"><img src="grupo_sozinho.png"><p>ISOLADA</p></div>
                 <div class="btn-card" onclick="setOcorrencia('AGREDIRAM/MACHUCARAM', 'tela_agentes')"><img src="sensacao_raio.png"><p>MACHUCARAM</p></div>
@@ -154,8 +151,10 @@
 
         <div id="tela_castigo" class="tela">
             <h2>Onde foi o castigo?</h2>
-            <button class="btn-prof" onclick="setOcorrencia('CASTIGO FORA DA SALA', 'tela_porta')">Fora da Sala</button>
-            <button class="btn-prof" onclick="setOcorrencia('CASTIGO DENTRO DA SALA', 'tela_castigo_interna')">Na frente da sala</button>
+            <div class="grid">
+                <div class="btn-card" onclick="setOcorrencia('CASTIGO FORA DA SALA', 'tela_porta')"><img src="fora_sala.png"><p>FORA DA SALA</p></div>
+                <div class="btn-card" onclick="setOcorrencia('CASTIGO EM FRENTE AOS ALUNOS', 'tela_castigo_interna')"><img src="frente_alunos.png"><p>EM FRENTE AOS ALUNOS</p></div>
+            </div>
         </div>
 
         <div id="tela_porta" class="tela">
@@ -167,9 +166,11 @@
         </div>
 
         <div id="tela_castigo_interna" class="tela">
-            <h2>No castigo dentro da sala...</h2>
-            <button class="btn-resp" onclick="finalizarRelato('As crianças riram')">As crianças riram</button>
-            <button class="btn-resp" onclick="finalizarRelato('A professora estava brava')">A professora estava brava</button>
+            <h2>O que aconteceu lá?</h2>
+            <div class="grid">
+                <div class="btn-card" onclick="finalizarRelato('As crianças riram')"><img src="criancas_riram.png"><p>CRIANÇAS RIRAM</p></div>
+                <div class="btn-card" onclick="finalizarRelato('Professora estava brava')"><img src="professora_brava.png"><p>PROFESSORA BRAVA</p></div>
+            </div>
         </div>
 
         <div id="tela_agentes" class="tela">
@@ -177,8 +178,8 @@
             <div class="grid">
                 <div class="btn-card" onclick="setAgente('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
                 <div class="btn-card" onclick="setAgente('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
-                <div class="btn-card" onclick="setAgente('Não conheço')"><p>NÃO CONHEÇO</p></div>
-                <div class="btn-card" onclick="setAgente('Sigilo')"><p>NÃO POSSO FALAR</p></div>
+                <div class="btn-card" onclick="setAgente('Não conheço')"><img src="nao_conheco.png"><p>NÃO CONHEÇO</p></div>
+                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="sigilo.png"><p>NÃO POSSO FALAR</p></div>
             </div>
         </div>
 
@@ -207,10 +208,8 @@
                 <select id="obs_conversa"><option value="Sim">Sim</option><option value="Não">Não</option></select>
                 <label>Isolamento no recreio?</label>
                 <select id="obs_isolamento"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
-                <label>Hipersensibilidade a sons/toque?</label>
-                <select id="obs_hiper"><option value="Sim">Sim</option><option value="Não">Não</option><option value="Não sei">Não sei</option></select>
             </div>
-            <button class="btn-prof" onclick="salvarAcompanhamento()">Salvar Observação</button>
+            <button class="btn-prof" onclick="salvarAcompanhamento()">Salvar</button>
             <button onclick="ir('menu')">Cancelar</button>
         </div>
 
@@ -227,7 +226,7 @@
                 <thead><tr><th>Tipo</th><th>Nome</th><th>ID</th></tr></thead>
                 <tbody></tbody>
             </table>
-            <button onclick="ir('menu')" style="margin-top:20px;">Fechar</button>
+            <button onclick="ir('menu')">Fechar</button>
         </div>
 
     </div>
