@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOC TOC TOC - Oficial Mongaguá</title>
+    <title>TOC TOC TOC - MongBeach</title>
     <style>
         :root { --primary: #00796b; --child: #00bcd4; --bg: #f4f7f6; --alert: #d32f2f; --report: #ff9800; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; }
@@ -22,7 +22,8 @@
         .btn-child { background: var(--child); color: white; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-        .btn-card { border: 2px solid #eee; border-radius: 18px; padding: 10px; cursor: pointer; background: #fff; }
+        .btn-card { border: 2px solid #eee; border-radius: 18px; padding: 10px; cursor: pointer; background: #fff; transition: 0.2s; }
+        .btn-card:active { transform: scale(0.95); }
         .btn-card img { width: 75px; height: 75px; object-fit: contain; }
         .btn-card p { font-size: 10px; font-weight: bold; margin-top: 5px; color: #555; text-transform: uppercase; }
         
@@ -141,7 +142,7 @@
                 <div class="btn-card" onclick="setAgente('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
                 <div class="btn-card" onclick="setAgente('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
                 <div class="btn-card" onclick="setAgente('Não conheço')"><img src="nao_conheco.png"><p>NÃO CONHEÇO</p></div>
-                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="sigilo.png"><p>SIGILO</p></div>
+                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="opcao_sigilo.png"><p>SIGILO</p></div>
             </div>
         </div>
 
