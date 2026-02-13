@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOC TOC TOC - MongBeach</title>
+    <title>TOC TOC TOC - Oficial MongBeach</title>
     <style>
         :root { --primary: #00796b; --child: #00bcd4; --bg: #f4f7f6; --alert: #d32f2f; --report: #ff9800; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; }
@@ -28,7 +28,7 @@
         .btn-card p { font-size: 10px; font-weight: bold; margin-top: 5px; color: #555; text-transform: uppercase; }
         
         .card-relatorio { background: #f9f9f9; padding: 15px; border-radius: 12px; border-left: 8px solid var(--primary); margin-bottom: 12px; text-align: left; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .footer { margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+        .footer { margin-top: 30px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -62,7 +62,7 @@
             <input type="text" id="prof_nome" placeholder="Nome Completo">
             <input type="text" id="prof_id_vinc" placeholder="Código da Turma (Ex: MONG-01)">
             <input type="password" id="prof_senha" placeholder="Crie sua Senha">
-            <button class="btn-prof" onclick="salvarProf()">Cadastrar Profissional</button>
+            <button class="btn-prof" onclick="salvarProf()">Cadastrar</button>
             <button onclick="ir('menu')">Voltar</button>
         </div>
 
@@ -77,9 +77,36 @@
         <div id="painel_pais" class="tela">
             <h2 id="boas_vindas_pai">Olá</h2>
             <button class="btn-child" onclick="ir('humor_inicial')">ENTREGAR PARA CRIANÇA</button>
-            <h3 style="font-size:14px; margin-top:20px; color:var(--primary)">RELATÓRIO DE ACOMPANHAMENTO</h3>
+            <h3 style="font-size:14px; margin-top:20px; color:var(--primary)">RELATÓRIO INTEGRADO</h3>
             <div id="historico_integrado"></div>
             <button class="btn-resp" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
+        </div>
+
+        <div id="login_prof" class="tela">
+            <h2>Login Professor</h2>
+            <input type="text" id="l_prof_nome" placeholder="Nome Usado no Cadastro">
+            <input type="password" id="l_prof_senha" placeholder="Senha">
+            <button class="btn-prof" onclick="logarProf()">Entrar</button>
+            <button onclick="ir('menu')">Voltar</button>
+        </div>
+
+        <div id="painel_prof" class="tela">
+            <h2>TURMA: <span id="id_turma_display"></span></h2>
+            <div id="lista_alunos_vinculados"></div>
+            <button class="btn-prof" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
+        </div>
+
+        <div id="tela_obs_prof" class="tela">
+            <h2 id="nome_aluno_obs">Diário Técnico</h2>
+            <div style="text-align:left; font-size:12px;">
+                <label>Contato Visual:</label>
+                <select id="o_visual"><option>Normal</option><option>Fugaz</option><option>Inexistente</option></select>
+                <label>Isolamento no recreio?</label>
+                <select id="o_isolamento"><option>Não</option><option>Sim</option><option>Não sei</option></select>
+                <label>Interesses Restritos?</label>
+                <select id="o_hiper"><option>Não</option><option>Sim</option><option>Não sei</option></select>
+            </div>
+            <button class="btn-prof" onclick="salvarObsTecnica()">Salvar Observação</button>
         </div>
 
         <div id="humor_inicial" class="tela">
@@ -95,10 +122,10 @@
         <div id="motivo_feliz" class="tela">
             <h2>O que deixou o Tatu feliz?</h2>
             <div class="grid">
-                <div class="btn-card" onclick="finalizarCriança('BRINCOU NO PÁTIO')"><img src="patio.png"><p>PÁTIO</p></div>
-                <div class="btn-card" onclick="finalizarCriança('RECEBEU UM ELOGIO')"><img src="tatu_feliz.png"><p>ELOGIO</p></div>
-                <div class="btn-card" onclick="finalizarCriança('COMEU ALGO BOM')"><img src="tatu_feliz.png"><p>COMIDA</p></div>
-                <div class="btn-card" onclick="finalizarCriança('GANHOU PRESENTE')"><img src="tatu_feliz.png"><p>PRESENTE</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Brincou no pátio')"><img src="patio.png"><p>PÁTIO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Foi elogiado')"><img src="tatu_feliz.png"><p>ELOGIO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Comeu algo bom')"><img src="tatu_feliz.png"><p>COMIDA</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Ganhou presente')"><img src="tatu_feliz.png"><p>PRESENTE</p></div>
             </div>
         </div>
 
@@ -108,7 +135,7 @@
                 <div class="btn-card" onclick="setOcorrencia('FICOU DE CASTIGO', 'tela_castigo')"><img src="castigo.png"><p>CASTIGO</p></div>
                 <div class="btn-card" onclick="setOcorrencia('RIRAM DE MIM', 'tela_agentes')"><img src="grupo_bullying.png"><p>RIRAM</p></div>
                 <div class="btn-card" onclick="setOcorrencia('FOI ISOLADO', 'tela_agentes')"><img src="grupo_sozinho.png"><p>ME IGNORARAM</p></div>
-                <div class="btn-card" onclick="setOcorrencia('FOI AGREDIDO', 'tela_agentes')"><img src="sensacao_raio.png"><p>MACHUCARAM</p></div>
+                <div class="btn-card" onclick="setOcorrencia('AGREDIDO/MACHUCADO', 'tela_agentes')"><img src="sensacao_raio.png"><p>MACHUCARAM</p></div>
             </div>
         </div>
 
@@ -142,49 +169,27 @@
                 <div class="btn-card" onclick="setAgente('Professora')"><img src="professora.png"><p>PROFESSORA</p></div>
                 <div class="btn-card" onclick="setAgente('Colegas')"><img src="grupo_unido.png"><p>COLEGAS</p></div>
                 <div class="btn-card" onclick="setAgente('Não conheço')"><img src="nao_conheco.png"><p>NÃO CONHEÇO</p></div>
-                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="opcao_sigilo.png"><p>SIGILO</p></div>
+                <div class="btn-card" onclick="setAgente('Sigilo')"><img src="opcao_sigilo.png"><p>NÃO POSSO FALAR</p></div>
             </div>
         </div>
 
         <div id="tela_corpo" class="tela">
             <h2>O que sentiu no corpo?</h2>
             <div class="grid">
-                <div class="btn-card" onclick="finalizarCriança('Nó na garganta')"><img src="sensacao_no.png"><p>NÓ</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Nó na garganta')"><img src="sensacao_no.png"><p>NÓ NA GARGANTA</p></div>
                 <div class="btn-card" onclick="finalizarCriança('Raiva/Calor')"><img src="sensacao_raio.png"><p>RAIVA</p></div>
-                <div class="btn-card" onclick="finalizarCriança('Choro')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Vontade de chorar')"><img src="sensacao_lagrimas.png"><p>CHORO</p></div>
+                <div class="btn-card" onclick="finalizarCriança('Dor física')"><img src="tatu_triste.png"><p>DOR</p></div>
             </div>
-        </div>
-
-        <div id="login_prof" class="tela">
-            <h2>Login Professor</h2>
-            <input type="text" id="l_prof_nome" placeholder="Seu Nome">
-            <input type="password" id="l_prof_senha" placeholder="Senha">
-            <button class="btn-prof" onclick="logarProf()">Entrar</button>
-            <button onclick="ir('menu')">Voltar</button>
-        </div>
-
-        <div id="painel_prof" class="tela">
-            <h2>CÓDIGO: <span id="id_turma_display"></span></h2>
-            <div id="lista_alunos_vinculados"></div>
-            <button class="btn-prof" onclick="ir('menu')" style="margin-top:20px;">Sair</button>
-        </div>
-
-        <div id="tela_obs_prof" class="tela">
-            <h2 id="nome_aluno_obs">Diário Técnico</h2>
-            <div style="text-align:left; font-size:12px;">
-                <label>Contato Visual:</label>
-                <select id="o_visual"><option>Normal</option><option>Fugaz</option><option>Inexistente</option></select>
-                <label>Isolamento no recreio?</label>
-                <select id="o_isolamento"><option>Não</option><option>Sim</option><option>Não sei</option></select>
-            </div>
-            <button class="btn-prof" onclick="salvarObsTecnica()">Salvar Diário</button>
         </div>
 
     </div>
 
     <div class="footer">
         Desenvolvido por <strong>MongBeach</strong><br>
-        Instagram: @mong.beach | (13) 99175-3601
+        Alessandro Bortoleto Rodrigues | CPF: 259.906.398-13<br>
+        E-mail: alebortoleto@gmail.com | WhatsApp: (13) 99175-3601<br>
+        Instagram: @mong.beach
     </div>
 </div>
 
@@ -230,7 +235,7 @@
             document.getElementById('boas_vindas_pai').innerText = "Responsável: " + userLogado.nome;
             mostrarRelatorioIntegrado();
             ir('painel_pais');
-        } else alert("CPF ou Senha inválidos.");
+        } else alert("Acesso Negado.");
     }
 
     function logarProf() {
@@ -249,7 +254,7 @@
         document.getElementById('lista_alunos_vinculados').innerHTML = meusAlunos.map(a => `
             <div style="background:#f0f0f0; padding:12px; margin:8px; border-radius:12px; text-align:left;">
                 <strong>${a.crianca}</strong><br>
-                <button onclick="abrirObs('${a.crianca}', '${a.cpf}')" style="background:var(--primary); color:white; padding:8px; margin-top:8px; border-radius:8px;">Anotação Técnica</button>
+                <button onclick="abrirObs('${a.crianca}', '${a.cpf}')" style="background:var(--primary); color:white; padding:8px; margin-top:8px; font-size:11px; border-radius:8px;">Observar</button>
             </div>
         `).join('') || "Nenhum aluno vinculado.";
     }
@@ -264,30 +269,33 @@
         let obs = JSON.parse(localStorage.getItem('tt_obs')) || [];
         obs.push({
             paiCpf: alunoSelecionado.paiCpf,
+            aluno: alunoSelecionado.nome,
             prof: userLogado.nome,
             data: new Date().toLocaleString(),
             tipo: 'PROFISSIONAL',
             visual: document.getElementById('o_visual').value,
-            isolamento: document.getElementById('o_isolamento').value
+            isolamento: document.getElementById('o_isolamento').value,
+            hiper: document.getElementById('o_hiper').value
         });
         localStorage.setItem('tt_obs', JSON.stringify(obs));
-        alert("Observação enviada aos pais!"); ir('painel_prof');
+        alert("Observação técnica salva!"); ir('painel_prof');
     }
 
     function setHumor(h) { 
         relatoCriança = { humor: h, ocorrencia: '', detalhe: '' }; 
         if(h === 'FELIZ') ir('motivo_feliz');
-        else if(h === 'NORMAL') finalizarCriança('O dia foi tranquilo');
+        else if(h === 'NORMAL') finalizarCriança('Dia tranquilo');
         else ir('motivo_triste');
     }
 
     function setOcorrencia(o, proxima) {
-        relatoCriança.ocorrencia += (relatoCriança.ocorrencia ? " -> " : "") + o;
+        if(relatoCriança.ocorrencia) relatoCriança.ocorrencia += " -> " + o;
+        else relatoCriança.ocorrencia = o;
         ir(proxima);
     }
 
     function setAgente(a) {
-        relatoCriança.detalhe = "Quem: " + a;
+        relatoCriança.detalhe = "Agente: " + a;
         ir('tela_corpo');
     }
 
@@ -298,6 +306,7 @@
         let obs = JSON.parse(localStorage.getItem('tt_obs')) || [];
         obs.push({
             paiCpf: userLogado.cpf,
+            aluno: userLogado.crianca,
             data: new Date().toLocaleString(),
             tipo: 'CRIANÇA',
             humor: relatoCriança.humor,
@@ -305,9 +314,8 @@
             detalhe: relatoCriança.detalhe
         });
         localStorage.setItem('tt_obs', JSON.stringify(obs));
-        alert("O Tatu contou para o papai!"); 
+        alert("O Tatu contou tudo!"); ir('painel_pais');
         mostrarRelatorioIntegrado();
-        ir('painel_pais');
     }
 
     function mostrarRelatorioIntegrado() {
@@ -315,11 +323,11 @@
         let minhas = todas.filter(o => o.paiCpf === userLogado.cpf);
         document.getElementById('historico_integrado').innerHTML = minhas.reverse().map(o => `
             <div class="card-relatorio" style="border-left-color: ${o.tipo === 'CRIANÇA' ? 'var(--child)' : 'var(--primary)'}">
-                <small><strong>${o.data}</strong> - ${o.tipo}</small><br>
-                ${o.tipo === 'CRIANÇA' ? `Humor: ${o.humor} <br> Ocorrência: ${o.ocorrencia} <br> Detalhe: ${o.detalhe}` : 
-                `<strong>Professor(a) ${o.prof}:</strong><br>Contato Visual: ${o.visual} | Isolamento: ${o.isolamento}`}
+                <small>${o.data} - <strong>${o.tipo}</strong></small><br>
+                ${o.tipo === 'CRIANÇA' ? `Humor: ${o.humor} | Ocorrência: ${o.ocorrencia} | ${o.detalhe}` : 
+                `<strong>Prof. ${o.prof}:</strong> Contato: ${o.visual} | Isolamento: ${o.isolamento} | Hiperfoco: ${o.hiper}`}
             </div>
-        `).join('') || "<p style='font-size:12px; color:#999'>Nenhum registro encontrado para esta criança.</p>";
+        `).join('') || "Sem registros.";
     }
 </script>
 </body>
